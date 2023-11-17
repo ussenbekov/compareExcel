@@ -1,6 +1,5 @@
 import openpyxl
 import pandas as pd
-import os
 
 
 class CompareExcelFile:

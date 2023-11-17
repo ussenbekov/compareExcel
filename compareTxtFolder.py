@@ -82,6 +82,6 @@ class CompareTxtFolder:
 
 if __name__ == "__main__":
     CompareTxtFolder(
-        r"\\test-pa.kazminerals.com\TKAZMIN_Operation2\FREEZE_FILES\posle\FD_COST_REPORT",
-        r"\\test-pa.kazminerals.com\TKAZMIN_Operation2\FREEZE_FILES\do\FD_COST_REPORT",
+        r"\\test-pa.kazminerals.com\TKAZMIN_Operation2\FREEZE_FILES\posle\FD_BUDGET_DETAILS",
+        r"\\test-pa.kazminerals.com\TKAZMIN_Operation2\FREEZE_FILES\do\FD_BUDGET_DETAILS",
     )
