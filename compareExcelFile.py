@@ -54,6 +54,6 @@ class CompareExcelFile:
 
 if __name__ == "__main__":
     CompareExcelFile(
-        "MASTER FILE_1.xlsx",
-        "MASTER FILE_2.xlsx",
+        "1.xlsx",
+        "2.xlsx",
     )
