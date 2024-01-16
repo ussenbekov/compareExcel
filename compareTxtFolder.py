@@ -28,8 +28,8 @@ class CompareTxtFolder:
         filename_1 = file_1.split("\\")[-1]
         message = f"{filename_1}"
 
-        df2 = self.get_df_from_file(file_1, self.skip_header)
-        df1 = self.get_df_from_file(file_2, self.skip_header)
+        df1 = self.get_df_from_file(file_1, self.skip_header)
+        df2 = self.get_df_from_file(file_2, self.skip_header)
 
         len_cols_df1 = len(df1.columns.values.tolist())
         len_cols_df2 = len(df2.columns.values.tolist())
@@ -45,9 +45,17 @@ class CompareTxtFolder:
 
         var_df = df1.merge(df2, how="left", on=join_columns, suffixes=("_1", "_2"))
         vals_cols = [str(values_column) + "_1", str(values_column) + "_2"]
-        var_df[vals_cols[0]] = pd.to_numeric(var_df[vals_cols[0]])
-        var_df[vals_cols[1]] = pd.to_numeric(var_df[vals_cols[1]])
-        var_df["var"] = round(var_df[vals_cols[0]] - var_df[vals_cols[1]], 5)
+        var_df[vals_cols] = var_df[vals_cols].replace(regex={"\+|\(|\)|\/|\ |NaN": ""})
+        var_df[vals_cols] = var_df[vals_cols].replace(regex={",": "."})
+        var_df[vals_cols] = var_df[vals_cols].fillna(0)
+        var_df["var"] = var_df.apply(
+            lambda x: round(float(x[vals_cols[0]]) - float(x[vals_cols[1]]), 5)
+            if (isinstance(x[vals_cols[0]], str) and x[vals_cols[0]].isdigit() == True)
+            or isinstance(x[vals_cols[0]], (int, float))
+            else int(x[vals_cols[1]] != x[vals_cols[0]]),
+            axis=1,
+        )
+
         var_df = var_df[var_df["var"] != 0]
 
         if len(var_df) == 0:
@@ -82,6 +90,6 @@ class CompareTxtFolder:
 
 if __name__ == "__main__":
     CompareTxtFolder(
-        r"\\test-pa.kazminerals.com\TKAZMIN_Operation2\FREEZE_FILES\posle\FD_BUDGET_DETAILS",
-        r"\\test-pa.kazminerals.com\TKAZMIN_Operation2\FREEZE_FILES\do\FD_BUDGET_DETAILS",
+        r"C:\Users\talgat.ussenbekov\Downloads\shs\do",
+        r"C:\Users\talgat.ussenbekov\Downloads\shs\posle",
     )
