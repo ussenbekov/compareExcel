@@ -83,6 +83,7 @@ class CompareTxtFolder:
             decimal=",",
             encoding="ISO-8859-1",
             low_memory=False,
+            dtype="object",
         )
 
         return df
