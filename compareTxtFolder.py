@@ -49,10 +49,15 @@ class CompareTxtFolder:
         var_df[vals_cols] = var_df[vals_cols].replace(regex={",": "."})
         var_df[vals_cols] = var_df[vals_cols].fillna(0)
         var_df["var"] = var_df.apply(
-            lambda x: round(float(x[vals_cols[0]]) - float(x[vals_cols[1]]), 5)
-            if (isinstance(x[vals_cols[0]], str) and x[vals_cols[0]].isdigit() == True)
-            or isinstance(x[vals_cols[0]], (int, float))
-            else int(x[vals_cols[1]] != x[vals_cols[0]]),
+            lambda x: (
+                round(float(x[vals_cols[0]]) - float(x[vals_cols[1]]), 5)
+                if (
+                    isinstance(x[vals_cols[0]], str)
+                    and x[vals_cols[0]].isdigit() == True
+                )
+                or isinstance(x[vals_cols[0]], (int, float))
+                else int(x[vals_cols[1]] != x[vals_cols[0]])
+            ),
             axis=1,
         )
 
