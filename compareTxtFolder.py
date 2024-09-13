@@ -96,6 +96,6 @@ class CompareTxtFolder:
 
 if __name__ == "__main__":
     CompareTxtFolder(
-        r"C:\Users\talgat.ussenbekov\Downloads\shs\do",
-        r"C:\Users\talgat.ussenbekov\Downloads\shs\posle",
+        r"do",
+        r"posle",
     )
